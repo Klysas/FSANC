@@ -13,8 +13,12 @@ namespace FSANC
 	public partial class ConfirmBox : Form
 	{
 		#region Variables
-		public bool confirmation = false;
+		public bool _confirmation = false;
 
+		/// <summary>
+		/// True if window is closed.
+		/// </summary>
+		private bool _closed = true;
 		#endregion
 
 		#region Constructors
@@ -28,7 +32,7 @@ namespace FSANC
 		#region Private methods
 		private void Button_Yes_Click(object sender, EventArgs e)
 		{
-			confirmation = true;
+			_confirmation = true;
 			this.close();
 		}
 
@@ -39,7 +43,7 @@ namespace FSANC
 
 		private void close() 
 		{
-			FormControler.ConfirmationClosed = true;
+			_closed = true;
 			this.Close();
 		}
 
@@ -52,11 +56,17 @@ namespace FSANC
 		/// <param name="names">List of names displayed in this window.</param>
 		public void show(String[] names) 
 		{
-			confirmation = false;
+			_confirmation = false;
+			_closed = false;
 			this.FilesList.Items.Clear();
 
 			this.FilesList.Items.AddRange(names);
 			this.ShowDialog();
+		}
+
+		public bool isClosed()
+		{
+			return _closed;
 		}
 
 		#endregion

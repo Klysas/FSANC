@@ -167,14 +167,12 @@ namespace FSANC
 		{
 			_confirmationBox.show(list);
 
-			while (!FormControler.ConfirmationClosed) 
+			while (!_confirmationBox.isClosed()) 
 			{
 				System.Threading.Thread.Sleep(10);
 			}
 
-			FormControler.ConfirmationClosed = false;
-
-			return _confirmationBox.confirmation;
+			return _confirmationBox._confirmation;
 		}
 
 		#endregion

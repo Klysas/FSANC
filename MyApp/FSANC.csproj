@@ -94,7 +94,6 @@
       <DependentUpon>ConfirmBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Film.cs" />
-    <Compile Include="Windows\Controlers\FormControler.cs" />
     <Compile Include="Objects\Language.cs" />
     <Compile Include="Objects\Serial.cs" />
     <Compile Include="Windows\MainForm.cs">
