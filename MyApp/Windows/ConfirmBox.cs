@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MyApp
+namespace FSANC
 {
 	public partial class ConfirmBox : Form
 	{

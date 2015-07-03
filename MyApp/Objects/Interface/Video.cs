@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp
+namespace FSANC
 {
+	/// <summary>
+	/// Video file interface.
+	/// </summary>
 	public class Video
 	{
 		public readonly String oldPath;

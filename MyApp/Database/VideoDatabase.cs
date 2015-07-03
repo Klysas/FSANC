@@ -9,8 +9,11 @@ using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.TvShows;
 
-namespace MyApp
+namespace FSANC
 {
+	/// <summary>
+	/// Class for connecting to video database and retrieving needed info about films and serials.
+	/// </summary>
 	class VideoDatabase
 	{
 		public static TMDbClient client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");

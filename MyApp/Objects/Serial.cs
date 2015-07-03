@@ -6,8 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace MyApp
+namespace FSANC
 {
+	/// <summary>
+	/// Class for serial video file.
+	/// </summary>
 	public class Serial : Video
 	{
 

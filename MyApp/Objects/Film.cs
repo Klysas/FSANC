@@ -6,8 +6,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MyApp
+namespace FSANC
 {
+	/// <summary>
+	/// Class for film video file.
+	/// </summary>
 	public class Film : Video
 	{
 		private int year;
