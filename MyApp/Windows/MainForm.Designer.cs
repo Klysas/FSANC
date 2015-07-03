@@ -33,42 +33,42 @@ namespace FSANC
 
 			this.MaximizeBox = false;
 
-			this.FilesCountLabel = new System.Windows.Forms.Label();
+			this.Label_FilesCount = new System.Windows.Forms.Label();
 			this.DropBox = new System.Windows.Forms.ComboBox();
 			this.ClearButton = new System.Windows.Forms.Button();
 			this.NameLabel = new System.Windows.Forms.Label();
-			this.NameBox = new System.Windows.Forms.TextBox();
+			this.TextBox_VideoName = new System.Windows.Forms.TextBox();
 			this.RenameFilesButton = new System.Windows.Forms.Button();
 			this.LanguageBox = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
 			// FilesCountLabel
 			// 
-			this.FilesCountLabel.AutoSize = true;
-			this.FilesCountLabel.BackColor = System.Drawing.SystemColors.Control;
-			this.FilesCountLabel.Cursor = System.Windows.Forms.Cursors.Default;
-			this.FilesCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.FilesCountLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.FilesCountLabel.Location = new System.Drawing.Point(12, 13);
-			this.FilesCountLabel.Name = "FilesCountLabel";
-			this.FilesCountLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.FilesCountLabel.Size = new System.Drawing.Size(96, 16);
-			this.FilesCountLabel.TabIndex = 0;
-			this.FilesCountLabel.Text = "Files loaded: 0";
+			this.Label_FilesCount.AutoSize = true;
+			this.Label_FilesCount.BackColor = System.Drawing.SystemColors.Control;
+			this.Label_FilesCount.Cursor = System.Windows.Forms.Cursors.Default;
+			this.Label_FilesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Label_FilesCount.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.Label_FilesCount.Location = new System.Drawing.Point(12, 13);
+			this.Label_FilesCount.Name = "FilesCountLabel";
+			this.Label_FilesCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
+			this.Label_FilesCount.Size = new System.Drawing.Size(96, 16);
+			this.Label_FilesCount.TabIndex = 0;
+			this.Label_FilesCount.Text = "Files loaded: 0";
 			// 
 			// DropBox
 			// 
 			this.DropBox.FormattingEnabled = true;
 			this.DropBox.Items.AddRange(new object[] {
-            FSANC.MainForm.videoType.SERIAL,
-            FSANC.MainForm.videoType.FILM});
+            FSANC.MainForm.VideoType.SERIAL,
+            FSANC.MainForm.VideoType.FILM});
 			this.DropBox.Location = new System.Drawing.Point(151, 12);
 			this.DropBox.Name = "DropBox";
 			this.DropBox.Size = new System.Drawing.Size(121, 21);
 			this.DropBox.TabIndex = 1;
 			this.DropBox.SelectedIndex = 0;
 			this.LanguageBox.Hide();
-			this.DropBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_VideoType_SelectedIndexChanged);
+			this.DropBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_VideoType_SelectedIndexChanged);
 			// 
 			// ClearButton
 			// 
@@ -78,7 +78,7 @@ namespace FSANC
 			this.ClearButton.TabIndex = 2;
 			this.ClearButton.Text = "C";
 			this.ClearButton.UseVisualStyleBackColor = true;
-			this.ClearButton.Click += new System.EventHandler(this.button_C_Click);
+			this.ClearButton.Click += new System.EventHandler(this.Button_C_Click);
 			// 
 			// NameLabel
 			// 
@@ -91,10 +91,10 @@ namespace FSANC
 			// 
 			// NameBox
 			// 
-			this.NameBox.Location = new System.Drawing.Point(58, 50);
-			this.NameBox.Name = "NameBox";
-			this.NameBox.Size = new System.Drawing.Size(214, 20);
-			this.NameBox.TabIndex = 4;
+			this.TextBox_VideoName.Location = new System.Drawing.Point(58, 50);
+			this.TextBox_VideoName.Name = "NameBox";
+			this.TextBox_VideoName.Size = new System.Drawing.Size(214, 20);
+			this.TextBox_VideoName.TabIndex = 4;
 			// 
 			// RenameFilesButton
 			// 
@@ -105,7 +105,7 @@ namespace FSANC
 			this.RenameFilesButton.TabIndex = 5;
 			this.RenameFilesButton.Text = "Rename Files";
 			this.RenameFilesButton.UseVisualStyleBackColor = true;
-			this.RenameFilesButton.Click += new System.EventHandler(this.RenameFilesButton_Click);
+			this.RenameFilesButton.Click += new System.EventHandler(this.Button_RenameFiles_Click);
 			// 
 			// LanguageBox
 			// 
@@ -131,11 +131,11 @@ namespace FSANC
 			this.ClientSize = new System.Drawing.Size(284, 162);
 			this.Controls.Add(this.LanguageBox);
 			this.Controls.Add(this.RenameFilesButton);
-			this.Controls.Add(this.NameBox);
+			this.Controls.Add(this.TextBox_VideoName);
 			this.Controls.Add(this.NameLabel);
 			this.Controls.Add(this.ClearButton);
 			this.Controls.Add(this.DropBox);
-			this.Controls.Add(this.FilesCountLabel);
+			this.Controls.Add(this.Label_FilesCount);
 			this.Name = "MainForm";
 			this.ShowIcon = false;
 			this.Text = "Rename F&S";
@@ -146,11 +146,11 @@ namespace FSANC
 
         #endregion
 
-        private System.Windows.Forms.Label FilesCountLabel;
+        private System.Windows.Forms.Label Label_FilesCount;
         private System.Windows.Forms.ComboBox DropBox;
         private System.Windows.Forms.Button ClearButton;
 		private System.Windows.Forms.Label NameLabel;
-		private System.Windows.Forms.TextBox NameBox;
+		private System.Windows.Forms.TextBox TextBox_VideoName;
 		private System.Windows.Forms.Button RenameFilesButton;
 		private System.Windows.Forms.ComboBox LanguageBox;
     }
