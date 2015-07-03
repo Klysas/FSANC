@@ -87,11 +87,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Windows\ConfirmBox.cs">
+    <Compile Include="Windows\ConfirmationBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\ConfirmBox.Designer.cs">
-      <DependentUpon>ConfirmBox.cs</DependentUpon>
+    <Compile Include="Windows\ConfirmationBox.Designer.cs">
+      <DependentUpon>ConfirmationBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Film.cs" />
     <Compile Include="Objects\Language.cs" />
@@ -106,8 +106,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Objects\Interface\Video.cs" />
     <Compile Include="Database\VideoDatabase.cs" />
-    <EmbeddedResource Include="Windows\ConfirmBox.resx">
-      <DependentUpon>ConfirmBox.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\ConfirmationBox.resx">
+      <DependentUpon>ConfirmationBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
