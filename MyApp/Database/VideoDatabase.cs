@@ -16,8 +16,12 @@ namespace FSANC
 	/// </summary>
 	class VideoDatabase
 	{
+		#region Variables
 		public static TMDbClient client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");
 
+		#endregion
+
+		#region Public static methods
 		public static String getEpisodeName(String name, int season, int episode)
 		{
 			TvEpisode tvEpisode;
@@ -67,5 +71,7 @@ namespace FSANC
 
 			return new String[]{};
 		}
+
+		#endregion
 	}
 }

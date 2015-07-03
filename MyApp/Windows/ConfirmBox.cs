@@ -12,20 +12,27 @@ namespace FSANC
 {
 	public partial class ConfirmBox : Form
 	{
+		#region Variables
 		public bool confirmation = false;
-		
+
+		#endregion
+
+		#region Constructors
 		public ConfirmBox()
 		{
 			InitializeComponent();
 		}
 
-		private void YesButton_Click(object sender, EventArgs e)
+		#endregion
+
+		#region Private methods
+		private void Button_Yes_Click(object sender, EventArgs e)
 		{
 			confirmation = true;
 			this.close();
 		}
 
-		private void NoButton_Click(object sender, EventArgs e)
+		private void Button_No_Click(object sender, EventArgs e)
 		{
 			this.close();
 		}
@@ -36,6 +43,13 @@ namespace FSANC
 			this.Close();
 		}
 
+		#endregion
+
+		#region Public methods
+		/// <summary>
+		/// Shows this window.
+		/// </summary>
+		/// <param name="names">List of names displayed in this window.</param>
 		public void show(String[] names) 
 		{
 			confirmation = false;
@@ -44,5 +58,7 @@ namespace FSANC
 			this.FilesList.Items.AddRange(names);
 			this.ShowDialog();
 		}
+
+		#endregion
 	}
 }

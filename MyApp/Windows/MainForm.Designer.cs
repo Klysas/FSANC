@@ -68,7 +68,7 @@ namespace FSANC
 			this.DropBox.TabIndex = 1;
 			this.DropBox.SelectedIndex = 0;
 			this.LanguageBox.Hide();
-			this.DropBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.DropBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_VideoType_SelectedIndexChanged);
 			// 
 			// ClearButton
 			// 
@@ -78,7 +78,7 @@ namespace FSANC
 			this.ClearButton.TabIndex = 2;
 			this.ClearButton.Text = "C";
 			this.ClearButton.UseVisualStyleBackColor = true;
-			this.ClearButton.Click += new System.EventHandler(this.button1_Click);
+			this.ClearButton.Click += new System.EventHandler(this.button_C_Click);
 			// 
 			// NameLabel
 			// 

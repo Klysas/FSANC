@@ -13,14 +13,16 @@ namespace FSANC
 	/// </summary>
 	public class Serial : Video
 	{
-
+		#region Variables
 		private int season;
 
 		private int episode;
 
 		private String episodeName;
+		
+		#endregion
 
-
+		#region Constructors
 		public Serial(String path)
 			: base(path)
 		{
@@ -29,7 +31,9 @@ namespace FSANC
 			extractSeasonAndEpisode();
 		}
 
+		#endregion
 
+		#region Private methods
 		private void extractSeasonAndEpisode()
 		{
 			String str = Path.GetFileNameWithoutExtension(oldPath);
@@ -49,6 +53,9 @@ namespace FSANC
 			}
 		}
 
+		#endregion
+
+		#region Public methods
 		public String getFormatedSeasonAndEpisode()
 		{
 			String s = season < 10 ? "0" : "";
@@ -78,5 +85,7 @@ namespace FSANC
 			Console.WriteLine("SERIAL: Renaming file in " + Path.GetDirectoryName(oldPath));
 			File.Move(oldPath, Path.GetDirectoryName(oldPath) + "\\" + getFormatedFullName());
 		}
+
+		#endregion
 	}
 }

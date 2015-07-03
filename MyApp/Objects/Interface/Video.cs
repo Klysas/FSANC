@@ -11,16 +11,22 @@ namespace FSANC
 	/// </summary>
 	public class Video
 	{
+		#region Variables
 		public readonly String oldPath;
 
 		private String name;
 
+		#endregion
+
+		#region Constructor
 		public Video(String path)
 		{
 			oldPath = path;
 
 			name = System.String.Empty;
 		}
+
+		#endregion
 
 		public String Name
 		{

@@ -13,12 +13,16 @@ namespace FSANC
 	/// </summary>
 	public class Film : Video
 	{
+		#region Variables
 		private int year;
 
 		private String language;
 
 		private String[] genres;
 
+		#endregion
+
+		#region Constructors
 		public Film(String path) : base(path)
 		{
 			year = 0;
@@ -27,7 +31,9 @@ namespace FSANC
 			tryToGetYear();
 		}
 
+		#endregion
 
+		#region Private methods
 		private void tryToGetYear()
 		{
 			year = int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(oldPath), @"\d{4}").ToString());
@@ -35,7 +41,9 @@ namespace FSANC
 			Console.WriteLine("FILM: Year: {0}", year);
 		}
 
+		#endregion
 
+		#region Public methods
 		public String getFileExtension()
 		{
 			return Path.GetExtension(oldPath);
@@ -87,5 +95,7 @@ namespace FSANC
 			Console.WriteLine("FILM: Renaming file in " + Path.GetDirectoryName(oldPath));
 			File.Move(oldPath, Path.GetDirectoryName(oldPath) + "\\" + getFormatedFullName());
 		}
+
+		#endregion
 	}
 }

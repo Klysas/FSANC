@@ -13,29 +13,47 @@ namespace FSANC
 {
 	public partial class MainForm : Form
 	{
-		private List<String> files;
-		private List<Video> videos;
+		#region Variables
+		/// <summary>
+		/// List of all dropped files on app.
+		/// </summary>
+		private List<String> _files;
 
-		public enum videoType { SERIAL, FILM};
-		private videoType current;
+		/// <summary>
+		/// List of video files.
+		/// </summary>
+		private List<Video> _videos;
 
-		private ConfirmBox confirmation;
+		/// <summary>
+		/// Video type of video file.
+		/// </summary>
+		public enum videoType { SERIAL, FILM };
+		private videoType _currentType;
 
+		private ConfirmBox _confirmationBox;
+
+		#endregion
+
+		#region Constructors
 		public MainForm()
 		{
 			InitializeComponent();
 
-			confirmation = new ConfirmBox();
+			// Initialization.
+			_confirmationBox = new ConfirmBox();
 
-			files = new List<String>();
-			videos = new List<Video>();
+			_files = new List<String>();
+			_videos = new List<Video>();
 
-			//Drag and drop
+			// Drag and drop.
 			this.AllowDrop = true;
 			this.DragEnter += MainForm_DragEnter;
 			this.DragDrop += MainForm_DragDrop;
 		}
 
+		#endregion
+
+		#region Private methods
 		private void MainForm_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -52,37 +70,38 @@ namespace FSANC
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
 			{
-				//Gets all paths of files dropped on form
+				// Gets all paths of files dropped on form.
 				String[] filesLoc = (string[])(e.Data.GetData(DataFormats.FileDrop));
 
+				// Add files to video list.
 				foreach (String loc in filesLoc)
 				{
-					if (!files.Contains(loc))
+					if (!_files.Contains(loc))
 					{
-						files.Add(loc);
-						if (current == videoType.SERIAL)
+						_files.Add(loc);
+						if (_currentType == videoType.SERIAL)
 						{
-							videos.Add(new Serial(loc));
+							_videos.Add(new Serial(loc));
 						}
 						else
 						{
-							videos.Add(new Film(loc));
+							_videos.Add(new Film(loc));
 						}
 					}
 				}
 
 				updateLabel();
-				Console.WriteLine("DROP: {0} dropped, {1} total.", filesLoc.Count(), files.Count());
+				Console.WriteLine("DROP: {0} dropped, {1} total.", filesLoc.Count(), _files.Count());
 			}
 		}
 
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		private void comboBox_VideoType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			current = (videoType)this.DropBox.SelectedItem;
+			_currentType = (videoType)this.DropBox.SelectedItem;
 
 			clearVideoList();
 
-			if (current == videoType.FILM)
+			if (_currentType == videoType.FILM)
 			{
 				this.LanguageBox.Show();
 			}
@@ -90,35 +109,23 @@ namespace FSANC
 			{
 				this.LanguageBox.Hide();
 			}
-			Console.WriteLine("DROP_BOX: Type = {0}", current);
+			Console.WriteLine("DROP_BOX: Type = {0}", _currentType);
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void button_C_Click(object sender, EventArgs e)
 		{
 			clearVideoList();
 		}
 
-		private void clearVideoList() 
-		{
-			files.Clear();
-			videos.Clear();
-			updateLabel();
-		}
-
-		private void updateLabel()
-		{
-			this.FilesCountLabel.Text = "Files loaded: " + files.Count();
-		}
-
 		private void RenameFilesButton_Click(object sender, EventArgs e)
 		{
-			if ((videos.Count() > 0) && (this.NameBox.Text != System.String.Empty))
+			if ((_videos.Count() > 0) && (this.NameBox.Text != System.String.Empty))
 			{
 				List<String> newNames = new List<String>();
 
-				if (current == videoType.SERIAL)
+				if (_currentType == videoType.SERIAL)
 				{
-					foreach (Serial video in videos)
+					foreach (Serial video in _videos)
 					{
 						video.setName(this.NameBox.Text);
 						newNames.Add(video.getFormatedFullName());
@@ -126,15 +133,15 @@ namespace FSANC
 
 					if (confirm(newNames.ToArray()))
 					{
-						foreach (Serial video in videos)
+						foreach (Serial video in _videos)
 						{
 							video.renameFile();
 						}
 					}
 				}
-				if ((current == videoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
+				if ((_currentType == videoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
 				{
-					foreach (Film video in videos)
+					foreach (Film video in _videos)
 					{
 						video.setName(this.NameBox.Text, this.LanguageBox.SelectedItem.ToString());
 						newNames.Add(video.getFormatedFullName());
@@ -142,7 +149,7 @@ namespace FSANC
 
 					if (confirm(newNames.ToArray()))
 					{
-						foreach (Film video in videos)
+						foreach (Film video in _videos)
 						{
 							video.renameFile();
 						}
@@ -151,9 +158,14 @@ namespace FSANC
 			}
 		}
 
+		private void LanguageBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Do nothing.
+		}
+
 		private bool confirm(String[] list)
 		{
-			confirmation.show(list);
+			_confirmationBox.show(list);
 
 			while (!FormControler.ConfirmationClosed) 
 			{
@@ -162,12 +174,24 @@ namespace FSANC
 
 			FormControler.ConfirmationClosed = false;
 
-			return confirmation.confirmation;
+			return _confirmationBox.confirmation;
 		}
 
-		private void LanguageBox_SelectedIndexChanged(object sender, EventArgs e)
+		#endregion
+
+		#region Utils
+		private void clearVideoList()
 		{
-			// Do nothing.
+			_files.Clear();
+			_videos.Clear();
+			updateLabel();
 		}
+
+		private void updateLabel()
+		{
+			this.FilesCountLabel.Text = "Files loaded: " + _files.Count();
+		}
+
+		#endregion
 	}
 }
