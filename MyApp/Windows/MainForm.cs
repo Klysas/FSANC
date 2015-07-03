@@ -30,7 +30,7 @@ namespace FSANC
 		public enum videoType { SERIAL, FILM };
 		private videoType _currentType;
 
-		private ConfirmBox _confirmationBox;
+		private ConfirmationBox _confirmationBox;
 
 		#endregion
 
@@ -40,7 +40,7 @@ namespace FSANC
 			InitializeComponent();
 
 			// Initialization.
-			_confirmationBox = new ConfirmBox();
+			_confirmationBox = new ConfirmationBox();
 
 			_files = new List<String>();
 			_videos = new List<Video>();
@@ -165,14 +165,14 @@ namespace FSANC
 
 		private bool confirm(String[] list)
 		{
-			_confirmationBox.show(list);
+			_confirmationBox.ShowConfirmationBox(list);
 
-			while (!_confirmationBox.isClosed()) 
+			while (!_confirmationBox.IsClosed()) 
 			{
 				System.Threading.Thread.Sleep(10);
 			}
 
-			return _confirmationBox._confirmation;
+			return _confirmationBox.IsConfirmed();
 		}
 
 		#endregion

@@ -1,6 +1,6 @@
 ﻿namespace FSANC
 {
-	partial class ConfirmBox
+	partial class ConfirmationBox
 	{
 		/// <summary>
 		/// Required designer variable.
