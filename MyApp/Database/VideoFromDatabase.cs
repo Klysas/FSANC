@@ -39,5 +39,13 @@ namespace FSANC
 
 		#endregion
 
+		#region Public methods
+		override public String ToString()
+		{
+			return this.Name + "\t" + this.Year;
+		}
+
+		#endregion
+
 	}
 }
