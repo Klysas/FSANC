@@ -34,7 +34,7 @@ namespace FSANC
 			VideoFromDatabase[] list = new VideoFromDatabase[container.Results.Count];
 			int i = 0;
 			foreach( SearchMovie movie in container.Results){
-				list[i++] = new VideoFromDatabase(movie.Id, movie.Title, movie.ReleaseDate.Value.Year);	// TODO: Fix when movie.ReleaseDate == null.
+				list[i++] = createVideoFromDatabase(movie.Id, movie.Title, movie.ReleaseDate);	
 			}
 
 			return list;
@@ -50,7 +50,7 @@ namespace FSANC
 			int i = 0;
 			foreach (TvShowBase serial in container.Results)
 			{
-				list[i++] = new VideoFromDatabase(serial.Id, serial.Name, serial.FirstAirDate.Value.Year);
+				list[i++] = createVideoFromDatabase(serial.Id, serial.Name, serial.FirstAirDate);
 			}
 
 			return list;
@@ -122,6 +122,16 @@ namespace FSANC
 			}
 
 			return new String[]{};
+		}
+
+		#endregion
+
+		#region Private static methods
+		// Protects date value being null.
+		private static VideoFromDatabase createVideoFromDatabase(int id, String name, DateTime? date)
+		{
+			if (date == null)	return new VideoFromDatabase(id, name, 0);
+			else				return new VideoFromDatabase(id, name, date.Value.Year);
 		}
 
 		#endregion
