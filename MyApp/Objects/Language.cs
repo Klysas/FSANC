@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace FSANC
 {
-	class Language
+	static class Language
 	{
-		public static readonly String[] languages = new String[] { "EN", "LT", "EN-Original", "LT-Original", "EN-Sub", "LT-Sub" };
+		public static readonly String[] _list = new String[] { "EN", "LT", "EN-Original", "LT-Original", "EN-Sub", "LT-Sub" };
 	}
 }

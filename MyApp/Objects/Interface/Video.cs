@@ -1,37 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FSANC
 {
-	/// <summary>
-	/// Video file interface.
-	/// </summary>
-	public class Video
+	public abstract class Video
 	{
 		#region Variables
-		public readonly String oldPath;
-
-		private String name;
+		public readonly String _filePath;
 
 		#endregion
 
 		#region Constructor
 		public Video(String path)
 		{
-			oldPath = path;
-
-			name = System.String.Empty;
+			_filePath = path;
 		}
 
 		#endregion
 
-		public String Name
+		#region Private methods
+		protected abstract String getFormatedFullName();
+
+		protected String getFileExtention()
 		{
-			get { return name; }
-			set { name = value; }
+			return Path.GetExtension(_filePath);
 		}
+
+		#endregion
+
+		#region Public methods
+		public abstract void renameFile();
+
+		public abstract void updateVideoInfo(VideoFromDatabase video);
+
+		public override string ToString()
+		{	
+			return getFormatedFullName();
+		}
+
+		#endregion
+
+		#region Properties
+		protected String Name
+		{
+			get;
+			set;
+		}
+
+		#endregion
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSANC.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,22 +12,25 @@ namespace FSANC
 	/// <summary>
 	/// Class for film video file.
 	/// </summary>
-	public class Film : Video
+	public sealed class Film : Video
 	{
 		#region Variables
-		private int year;
+		private const String TAG = "FILM";
 
-		private String language;
 
-		private String[] genres;
+		private int _year;
+
+		private String _language;
+
+		private String[] _genres;
 
 		#endregion
 
 		#region Constructors
-		public Film(String path) : base(path)
+		public Film(String path)
+			: base(path)
 		{
-			year = 0;
-			language = System.String.Empty;
+			_language = System.String.Empty;
 
 			tryToGetYear();
 		}
@@ -36,64 +40,89 @@ namespace FSANC
 		#region Private methods
 		private void tryToGetYear()
 		{
-			year = int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(oldPath), @"\d{4}").ToString());
-
-			Console.WriteLine("FILM: Year: {0}", year);
+			try
+			{
+				_year = int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(_filePath), @"\d{4}").ToString());
+			}
+			catch (Exception e)
+			{
+				_year = 0;
+			}
+			finally
+			{
+				Log.print(TAG, "Year extracted from file = " + _year);
+			}
 		}
 
-		#endregion
-
-		#region Public methods
-		public String getFileExtension()
+		protected override String getFormatedFullName()
 		{
-			return Path.GetExtension(oldPath);
+			return Name + " [" + _year + "][" + _language + "] [" + getFormatedGenres() + "]" + getFileExtention();
 		}
 
-
-		public String getFormatedFullName()
+		private String getFormatedGenres()
 		{
-			return Name + " [" + year + "][" + language + "] [" + getFormatedGenres() + "]" + getFileExtension();
-		}
-
-
-		public String getFormatedGenres() {
 			StringBuilder sb = new StringBuilder();
 
-			if (genres.Count() == 0)
+			if (_genres.Count() == 0)
 			{
 				return System.String.Empty;
 			}
 
-			sb.Append(genres[0]);
-			for(var i = 1; i < genres.Count(); i++)
+			sb.Append(_genres[0]);
+			for (var i = 1; i < _genres.Count(); i++)
 			{
-				sb.Append(@"&" + genres[i]);
+				sb.Append(@"&" + _genres[i]);
 			}
 
 			return sb.ToString();
 		}
 
-
-		public void setName(String name, String language) 
+		private void updateGenres(int id)
 		{
-			this.Name = name;
-			this.language = language;
-			genres = VideoDatabase.getFilmGenres(this.Name, year);
-			for (int i = 0; i < genres.Count(); i++ )
+			_genres = VideoDatabase.getFilmGenres(id);
+			for (int i = 0; i < _genres.Count(); i++)
 			{
-				if (genres[i].Equals("Science Fiction"))
+				if (_genres[i].Equals("Science Fiction"))
 				{
-					genres[i] = "Sci-Fi";
+					_genres[i] = "Sci-Fi";
 				}
 			}
-			Console.WriteLine("FILM: Name: {0}, Year: {1}, Genres: {2}", this.Name, year, genres.ToString());
 		}
 
+		#endregion
 
-		public void renameFile()
+		#region Public methods
+		public override void updateVideoInfo(VideoFromDatabase video)
 		{
-			Console.WriteLine("FILM: Renaming file in " + Path.GetDirectoryName(oldPath));
-			File.Move(oldPath, Path.GetDirectoryName(oldPath) + "\\" + getFormatedFullName());
+			this.Name = video.Name;
+			this.Year = video.Year;
+
+			updateGenres(video.Id);
+		}
+
+		// Renames file.
+		public override void renameFile() // TODO: only can rename files, when language is set and updateVideoInfo() is called.
+		{
+			Log.print(TAG, "Renaming file " + Path.GetDirectoryName(_filePath));
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());
+		}
+
+		#endregion
+
+		#region Private properties
+		private int Year
+		{
+			get { return _year;}
+			set { if (value != 0) _year = value; }
+		}
+
+		#endregion
+
+		#region Public properties
+		public String Language
+		{
+			get { return _language; }
+			set { if (FSANC.Language._list.Contains(value)) _language = value; }
 		}
 
 		#endregion

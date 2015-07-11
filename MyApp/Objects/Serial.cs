@@ -5,20 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using FSANC.Utils;
 
 namespace FSANC
 {
 	/// <summary>
 	/// Class for serial video file.
 	/// </summary>
-	public class Serial : Video
+	public sealed class Serial : Video
 	{
 		#region Variables
-		private int season;
+		private const String TAG = "SERIAL";
 
-		private int episode;
+		private int _season;
 
-		private String episodeName;
+		private int _episode;
+
+		private String _episodeName;
 		
 		#endregion
 
@@ -26,7 +29,7 @@ namespace FSANC
 		public Serial(String path)
 			: base(path)
 		{
-			episodeName = System.String.Empty;
+			_episodeName = System.String.Empty;
 
 			extractSeasonAndEpisode();
 		}
@@ -36,54 +39,57 @@ namespace FSANC
 		#region Private methods
 		private void extractSeasonAndEpisode()
 		{
-			String str = Path.GetFileNameWithoutExtension(oldPath);
+			String str = Path.GetFileNameWithoutExtension(_filePath);
 
-			String formatedSeasonAndEpisode = Regex.Match(str, @"S\d{2}E\d{2}").ToString();
+			String seasonAndEpisode = Regex.Match(str, @"S\d{2}E\d{2}").ToString();
+			if (seasonAndEpisode.Equals("")) seasonAndEpisode = Regex.Match(str, @"s\d{2}e\d{2}").ToString();
 
-			if (!formatedSeasonAndEpisode.Equals(""))
+			if (!seasonAndEpisode.Equals(""))
 			{
-				season = int.Parse(formatedSeasonAndEpisode.Substring(1, 2));
-				episode = int.Parse(formatedSeasonAndEpisode.Substring(4));
+				_season = int.Parse(seasonAndEpisode.Substring(1, 2));
+				_episode = int.Parse(seasonAndEpisode.Substring(4));
 
-				Console.WriteLine("SERIAL: {0} S: {1} E: {2}", formatedSeasonAndEpisode, season, episode);
+				Log.print(TAG, seasonAndEpisode +" S = "+ _season +" E = "+ _episode);
 			}
 			else
 			{
-				Console.WriteLine("SERIAL: Failed to get season and episode values.");
+				_season = 0;
+				_episode = 0;
+				Log.print(TAG, "Didn't find season/episode values in file name.");
 			}
+		}
+
+		protected override String getFormatedFullName()
+		{
+			return Name + " [" + getFormatedSeasonAndEpisode() +" "+ _episodeName + "]" + getFileExtention();
+		}
+
+		private String getFormatedSeasonAndEpisode()
+		{
+			String s = _season < 10 ? "0" : "";
+			String e = _episode < 10 ? "0" : "";
+			return "S" + s + _season + "E" + e + _episode;
+		}
+
+		private void updateEpisodeName(int id)
+		{
+			_episodeName = VideoDatabase.getEpisodeName(id, _season, _episode);
 		}
 
 		#endregion
 
 		#region Public methods
-		public String getFormatedSeasonAndEpisode()
+		public override void updateVideoInfo(VideoFromDatabase video)
 		{
-			String s = season < 10 ? "0" : "";
-			String e = episode < 10 ? "0" : "";
-			return "S" + s + season + "E" + e + episode;
+			this.Name = video.Name;
+
+			updateEpisodeName(video.Id);
 		}
 
-		public String getFileExtention()
+		public override void renameFile() // TODO: recheck.
 		{
-			return Path.GetExtension(oldPath);
-		}
-
-		public void setName(String name) 
-		{
-			this.Name = name;
-			episodeName = VideoDatabase.getEpisodeName(this.Name, season, episode);
-			Console.WriteLine("SERIAL: Name: {0}, Episode: {1}", this.Name, episodeName);
-		}
-
-		public String getFormatedFullName()
-		{
-			return Name + " [" + getFormatedSeasonAndEpisode() +" "+ episodeName + "]" + getFileExtention();
-		}
-
-		public void renameFile()
-		{
-			Console.WriteLine("SERIAL: Renaming file in " + Path.GetDirectoryName(oldPath));
-			File.Move(oldPath, Path.GetDirectoryName(oldPath) + "\\" + getFormatedFullName());
+			Console.WriteLine("SERIAL: Renaming file in " + Path.GetDirectoryName(_filePath));
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());
 		}
 
 		#endregion
