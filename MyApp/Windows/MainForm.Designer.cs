@@ -138,7 +138,7 @@ namespace FSANC
 			this.Controls.Add(this.Label_FilesCount);
 			this.Name = "MainForm";
 			this.ShowIcon = false;
-			this.Text = "Rename F&S";
+			this.Text = "Rename Video Files";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
