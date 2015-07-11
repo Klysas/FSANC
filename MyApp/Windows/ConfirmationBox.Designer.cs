@@ -1,4 +1,5 @@
-﻿namespace FSANC
+﻿using System.Windows.Forms;
+namespace FSANC
 {
 	partial class ConfirmationBox
 	{
@@ -28,6 +29,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.StartPosition = FormStartPosition.CenterParent;
+			
 			this.YesButton = new System.Windows.Forms.Button();
 			this.NoButton = new System.Windows.Forms.Button();
 			this.ConfirmationLabel = new System.Windows.Forms.Label();

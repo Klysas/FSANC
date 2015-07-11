@@ -1,4 +1,5 @@
-﻿namespace FSANC.Windows
+﻿using System.Windows.Forms;
+namespace FSANC.Windows
 {
 	partial class SelectionBox
 	{
@@ -28,6 +29,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.StartPosition = FormStartPosition.CenterParent;
+
 			this.Button_Ok = new System.Windows.Forms.Button();
 			this.ListBox_Files = new System.Windows.Forms.ListBox();
 			this.Button_Cancel = new System.Windows.Forms.Button();
