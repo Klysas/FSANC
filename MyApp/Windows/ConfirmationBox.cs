@@ -43,7 +43,7 @@ namespace FSANC
 		/// </summary>
 		/// <param name="names">Names are displayed</param>
 		/// <returns>If 'Yes' pressed - true, otherwise - false</returns>
-		public bool ShowConfirmationBox(String[] names) 
+		public bool ShowConfirmationBox(Video[] names) 
 		{
 			// Default value is 'No'.
 			this.DialogResult = System.Windows.Forms.DialogResult.No;

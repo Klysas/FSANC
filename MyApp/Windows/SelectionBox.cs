@@ -16,11 +16,18 @@ namespace FSANC.Windows
 		public SelectionBox()
 		{
 			InitializeComponent();
+
 		}
 
 		#region Private methods
 		private void Button_Ok_Click(object sender, EventArgs e)
 		{
+			this.Close();
+		}
+
+		private void Button_Cancel_Click(object sender, EventArgs e)
+		{
+			this.ListBox_Files.SelectedIndex = -1;
 			this.Close();
 		}
 
@@ -34,6 +41,8 @@ namespace FSANC.Windows
 
 		private void updateListBox(VideoFromDatabase[] list)
 		{
+			if (list == null) return;
+
 			foreach (VideoFromDatabase video in list)
 			{
 				this.ListBox_Files.Items.Add(video);
@@ -59,5 +68,6 @@ namespace FSANC.Windows
 		}
 
 		#endregion
+
 	}
 }

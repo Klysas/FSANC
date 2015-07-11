@@ -36,7 +36,7 @@
 			// 
 			// YesButton
 			// 
-			this.YesButton.Location = new System.Drawing.Point(154, 294);
+			this.YesButton.Location = new System.Drawing.Point(112, 296);
 			this.YesButton.Name = "YesButton";
 			this.YesButton.Size = new System.Drawing.Size(75, 23);
 			this.YesButton.TabIndex = 0;
@@ -46,7 +46,7 @@
 			// 
 			// NoButton
 			// 
-			this.NoButton.Location = new System.Drawing.Point(235, 294);
+			this.NoButton.Location = new System.Drawing.Point(193, 296);
 			this.NoButton.Name = "NoButton";
 			this.NoButton.Size = new System.Drawing.Size(75, 23);
 			this.NoButton.TabIndex = 1;
@@ -57,7 +57,7 @@
 			// ConfirmationLabel
 			// 
 			this.ConfirmationLabel.AutoSize = true;
-			this.ConfirmationLabel.Location = new System.Drawing.Point(172, 278);
+			this.ConfirmationLabel.Location = new System.Drawing.Point(130, 280);
 			this.ConfirmationLabel.Name = "ConfirmationLabel";
 			this.ConfirmationLabel.Size = new System.Drawing.Size(127, 13);
 			this.ConfirmationLabel.TabIndex = 2;
@@ -68,14 +68,15 @@
 			this.FilesList.FormattingEnabled = true;
 			this.FilesList.Location = new System.Drawing.Point(13, 13);
 			this.FilesList.Name = "FilesList";
-			this.FilesList.Size = new System.Drawing.Size(444, 264);
+			this.FilesList.Size = new System.Drawing.Size(360, 264);
 			this.FilesList.TabIndex = 3;
 			// 
 			// ConfirmationBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(469, 325);
+			this.ClientSize = new System.Drawing.Size(385, 329);
+			this.ControlBox = false;
 			this.Controls.Add(this.FilesList);
 			this.Controls.Add(this.ConfirmationLabel);
 			this.Controls.Add(this.NoButton);

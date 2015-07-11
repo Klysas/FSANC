@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FSANC.Utils;
+using FSANC.Windows;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +16,8 @@ namespace FSANC
 	public partial class MainForm : Form
 	{
 		#region Variables
+		private const String TAG = "MAIN_FORM";
+
 		/// <summary>
 		/// List of all dropped files on app.
 		/// </summary>
@@ -25,16 +29,13 @@ namespace FSANC
 		private List<Video> _videos;
 
 		/// <summary>
-		/// Video type of video file.
+		/// Type of video file.
 		/// </summary>
 		public enum VideoType { SERIAL, FILM };
-
-		/// <summary>
-		/// Current video type.
-		/// </summary>
-		private VideoType _currentVideoType;
+		private		VideoType _currentVideoType;
 
 		private ConfirmationBox _confirmationBox;
+		private SelectionBox	_selectionBox;
 
 		#endregion
 
@@ -46,6 +47,7 @@ namespace FSANC
 
 			// Initialization.
 			_confirmationBox = new ConfirmationBox();
+			_selectionBox = new SelectionBox();
 			_files = new List<String>();
 			_videos = new List<Video>();
 
@@ -124,40 +126,52 @@ namespace FSANC
 		{
 			if ((_videos.Count() > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
 			{
-				List<String> _formatedNames = new List<String>();
-
+				VideoFromDatabase videoInfo;
 				if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
 				{
 					// Film.
+					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getFilmList(this.TextBox_VideoName.Text));
+
+					if (videoInfo == null) return;
+
 					foreach (Film video in _videos)
 					{
-						video.setName(this.TextBox_VideoName.Text, this.LanguageBox.SelectedItem.ToString());
-						_formatedNames.Add(video.getFormatedFullName());
+						video.updateVideoInfo(videoInfo);
+						video.Language = this.LanguageBox.SelectedItem.ToString();
 					}
 
-					if (Confirm(_formatedNames.ToArray()))
+					if (Confirm(_videos.ToArray()))
 					{
 						foreach (Film video in _videos)
 						{
 							video.renameFile();
 						}
+
+						ClearVideoList();
+						UpdateUI();
 					}
 				}
-				else
+				else if(_currentVideoType == VideoType.SERIAL)
 				{
 					// Serial.
+					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getSerialList(this.TextBox_VideoName.Text));
+
+					if (videoInfo == null) return;
+
 					foreach (Serial video in _videos)
 					{
-						video.setName(this.TextBox_VideoName.Text);
-						_formatedNames.Add(video.getFormatedFullName());
+						video.updateVideoInfo(videoInfo);
 					}
 
-					if (Confirm(_formatedNames.ToArray()))
+					if (Confirm(_videos.ToArray()))
 					{
 						foreach (Serial video in _videos)
 						{
 							video.renameFile();
 						}
+
+						ClearVideoList();
+						UpdateUI();
 					}
 				}
 			}
@@ -168,20 +182,12 @@ namespace FSANC
 			// Do nothing.
 		}
 
-		private bool Confirm(String[] list)
+		private bool Confirm(Video[] list)
 		{
-			_confirmationBox.ShowConfirmationBox(list);
-
-			while (!_confirmationBox.IsClosed()) 
-			{
-				System.Threading.Thread.Sleep(50);
-			}
-
-			return _confirmationBox.IsConfirmed();
+			return _confirmationBox.ShowConfirmationBox(list);
 		}
 
 		#endregion
-
 
 		#region Utils
 		private void ClearVideoList()
