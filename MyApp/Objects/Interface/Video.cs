@@ -33,7 +33,10 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
-		public abstract void renameFile();
+		public void renameFile() // TODO: only can rename files, when language is set and updateVideoInfo() is called.
+		{
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());// NotSupportedException unhandled.
+		}
 
 		public abstract void updateVideoInfo(VideoFromDatabase video);
 

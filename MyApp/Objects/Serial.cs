@@ -86,12 +86,6 @@ namespace FSANC
 			updateEpisodeName(video.Id);
 		}
 
-		public override void renameFile() // TODO: recheck.
-		{
-			Console.WriteLine("SERIAL: Renaming file in " + Path.GetDirectoryName(_filePath));
-			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());
-		}
-
 		#endregion
 	}
 }

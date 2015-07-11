@@ -100,13 +100,6 @@ namespace FSANC
 			updateGenres(video.Id);
 		}
 
-		// Renames file.
-		public override void renameFile() // TODO: only can rename files, when language is set and updateVideoInfo() is called.
-		{
-			Log.print(TAG, "Renaming file " + Path.GetDirectoryName(_filePath));
-			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());
-		}
-
 		#endregion
 
 		#region Private properties
