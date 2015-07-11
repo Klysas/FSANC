@@ -18,7 +18,7 @@ namespace FSANC
 
 		#endregion
 
-		#region Variables
+		#region Properties
 		public int Id
 		{
 			get;

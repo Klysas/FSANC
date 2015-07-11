@@ -34,7 +34,7 @@ namespace FSANC
 			VideoFromDatabase[] list = new VideoFromDatabase[container.Results.Count];
 			int i = 0;
 			foreach( SearchMovie movie in container.Results){
-				list[i++] = new VideoFromDatabase(movie.Id, movie.Title, movie.ReleaseDate.Value.Year);
+				list[i++] = new VideoFromDatabase(movie.Id, movie.Title, movie.ReleaseDate.Value.Year);	// TODO: Fix when movie.ReleaseDate == null.
 			}
 
 			return list;
