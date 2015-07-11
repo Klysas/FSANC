@@ -12,20 +12,6 @@ namespace FSANC
 {
 	public partial class ConfirmationBox : Form
 	{
-		#region Variables
-		/// <summary>
-		/// Shows "Yes"(true) or "No"(false) was pressed.
-		/// </summary>
-		private bool _confirmed = false;
-
-		/// <summary>
-		/// True if window is closed.
-		/// </summary>
-		private bool _closed = true;
-
-		#endregion
-
-
 		#region Constructors
 		public ConfirmationBox()
 		{
@@ -38,18 +24,13 @@ namespace FSANC
 		#region Private methods
 		private void Button_Yes_Click(object sender, EventArgs e)
 		{
-			_confirmed = true;
-			this.CloseConfirmationBox();
+			this.DialogResult = System.Windows.Forms.DialogResult.Yes;
+			this.Close();
 		}
 
 		private void Button_No_Click(object sender, EventArgs e)
 		{
-			this.CloseConfirmationBox();
-		}
-
-		private void CloseConfirmationBox() 
-		{
-			_closed = true;
+			this.DialogResult = System.Windows.Forms.DialogResult.No;
 			this.Close();
 		}
 
@@ -58,29 +39,21 @@ namespace FSANC
 
 		#region Public methods
 		/// <summary>
-		/// Shows this window.
+		/// Shows window until 'Yes'/'No' is pressed.
 		/// </summary>
-		/// <param name="names">List of names displayed in this window.</param>
-		public void ShowConfirmationBox(String[] names) 
+		/// <param name="names">Names are displayed</param>
+		/// <returns>If 'Yes' pressed - true, otherwise - false</returns>
+		public bool ShowConfirmationBox(String[] names) 
 		{
-			_closed = false;
-			_confirmed = false;
+			// Default value is 'No'.
+			this.DialogResult = System.Windows.Forms.DialogResult.No;
 
 			// Make sure that list is empty.
 			this.FilesList.Items.Clear();
 
 			this.FilesList.Items.AddRange(names);
-			this.ShowDialog();
-		}
 
-		public bool IsClosed()
-		{
-			return _closed;
-		}
-
-		public bool IsConfirmed()
-		{
-			return _confirmed;
+			return this.ShowDialog() == (System.Windows.Forms.DialogResult.Yes) ? true : false;
 		}
 
 		#endregion

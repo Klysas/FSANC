@@ -28,11 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-
-			this.MinimizeBox = false;
-			this.MaximizeBox = false;
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			
 			this.YesButton = new System.Windows.Forms.Button();
 			this.NoButton = new System.Windows.Forms.Button();
 			this.ConfirmationLabel = new System.Windows.Forms.Label();
@@ -62,7 +57,7 @@
 			// ConfirmationLabel
 			// 
 			this.ConfirmationLabel.AutoSize = true;
-			this.ConfirmationLabel.Location = new System.Drawing.Point(167, 278);
+			this.ConfirmationLabel.Location = new System.Drawing.Point(172, 278);
 			this.ConfirmationLabel.Name = "ConfirmationLabel";
 			this.ConfirmationLabel.Size = new System.Drawing.Size(127, 13);
 			this.ConfirmationLabel.TabIndex = 2;
@@ -76,7 +71,7 @@
 			this.FilesList.Size = new System.Drawing.Size(444, 264);
 			this.FilesList.TabIndex = 3;
 			// 
-			// ConfirmBox
+			// ConfirmationBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -85,7 +80,10 @@
 			this.Controls.Add(this.ConfirmationLabel);
 			this.Controls.Add(this.NoButton);
 			this.Controls.Add(this.YesButton);
-			this.Name = "ConfirmBox";
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
+			this.Name = "ConfirmationBox";
 			this.ShowIcon = false;
 			this.ResumeLayout(false);
 			this.PerformLayout();
