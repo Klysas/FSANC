@@ -14,15 +14,48 @@ namespace FSANC
 	/// <summary>
 	/// Class for connecting to video database and retrieving needed info about films and serials.
 	/// </summary>
-	class VideoDatabase
+	public class VideoDatabase
 	{
 		#region Variables
+		private const String TAG = "VIDEO_DATABASE";
+
 		private static TMDbClient client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");
 
 		#endregion
 
 
 		#region Public static methods
+		public static VideoFromDatabase[] getFilmList(String name)
+		{
+			SearchContainer<SearchMovie> container = client.SearchMovie(name);
+
+			if (container.Results.Count == 0) return null;
+
+			VideoFromDatabase[] list = new VideoFromDatabase[container.Results.Count];
+			int i = 0;
+			foreach( SearchMovie movie in container.Results){
+				list[i++] = new VideoFromDatabase(movie.Id, movie.Title, movie.ReleaseDate.Value.Year);
+			}
+
+			return list;
+		}
+
+		public static VideoFromDatabase[] getSerialList(String name)
+		{
+			SearchContainer<TvShowBase> container = client.SearchTvShow(name);
+
+			if (container.Results.Count == 0) return null;
+
+			VideoFromDatabase[] list = new VideoFromDatabase[container.Results.Count];
+			int i = 0;
+			foreach (TvShowBase serial in container.Results)
+			{
+				list[i++] = new VideoFromDatabase(serial.Id, serial.Name, serial.FirstAirDate.Value.Year);
+			}
+
+			return list;
+		}
+
 		public static String getEpisodeName(String name, int season, int episode)
 		{
 			TvEpisode tvEpisode;
