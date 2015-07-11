@@ -19,7 +19,7 @@ namespace FSANC
 		#region Variables
 		private const String TAG = "VIDEO_DATABASE";
 
-		private static TMDbClient client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");
+		private static TMDbClient _client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");
 
 		#endregion
 
@@ -27,7 +27,7 @@ namespace FSANC
 		#region Public static methods
 		public static VideoFromDatabase[] getFilmList(String name)
 		{
-			SearchContainer<SearchMovie> container = client.SearchMovie(name);
+			SearchContainer<SearchMovie> container = _client.SearchMovie(name);
 
 			if (container.Results.Count == 0) return null;
 
@@ -42,7 +42,7 @@ namespace FSANC
 
 		public static VideoFromDatabase[] getSerialList(String name)
 		{
-			SearchContainer<TvShowBase> container = client.SearchTvShow(name);
+			SearchContainer<TvShowBase> container = _client.SearchTvShow(name);
 
 			if (container.Results.Count == 0) return null;
 
@@ -56,14 +56,19 @@ namespace FSANC
 			return list;
 		}
 
+		public static String getEpisodeName(int id, int season, int episode)
+		{
+			return _client.GetTvEpisode(id, season, episode).Name;
+		}
+
 		public static String getEpisodeName(String name, int season, int episode)
 		{
 			TvEpisode tvEpisode;
-			SearchContainer<TvShowBase> container = client.SearchTvShow(name);
+			SearchContainer<TvShowBase> container = _client.SearchTvShow(name);
 
 			if (container.Results.Count > 0)
 			{
-				tvEpisode = client.GetTvEpisode(client.SearchTvShow(name).Results[0].Id, season, episode);
+				tvEpisode = _client.GetTvEpisode(_client.SearchTvShow(name).Results[0].Id, season, episode);
 				return tvEpisode.Name;
 			}
 			else 
@@ -74,10 +79,23 @@ namespace FSANC
 			return System.String.Empty;
 		}
 
+		public static String[] getFilmGenres(int id)
+		{
+			Movie theMovie = _client.GetMovie(id);;
+
+			String[] str = new String[theMovie.Genres.Count];
+			int i = 0;
+			foreach (Genre genre in theMovie.Genres)
+			{
+				str[i++] = genre.Name;
+			}
+			return str;
+		}
+
 		public static String[] getFilmGenres(String name, int year) 
 		{
 			Movie theMovie;
-			SearchContainer<SearchMovie> container = client.SearchMovie(name);
+			SearchContainer<SearchMovie> container = _client.SearchMovie(name);
 
 			if (container.Results.Count > 0)
 			{
@@ -86,7 +104,7 @@ namespace FSANC
 				{
 					if (movie.ReleaseDate.Value.Year == year)
 					{
-						theMovie = client.GetMovie(movie.Id);
+						theMovie = _client.GetMovie(movie.Id);
 
 						String[] str = new String[theMovie.Genres.Count];
 						int i = 0;
