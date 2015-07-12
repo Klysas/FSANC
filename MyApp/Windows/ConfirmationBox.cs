@@ -34,6 +34,17 @@ namespace FSANC
 			this.Close();
 		}
 
+		private void Reset()
+		{
+			// Default value is 'No'.
+			this.DialogResult = System.Windows.Forms.DialogResult.No;
+
+			// Make sure that list is empty.
+			this.FilesList.Items.Clear();
+
+			this.YesButton.Focus();
+		}
+
 		#endregion
 
 
@@ -45,12 +56,7 @@ namespace FSANC
 		/// <returns>If 'Yes' pressed - true, otherwise - false</returns>
 		public bool ShowConfirmationBox(Video[] names) 
 		{
-			// Default value is 'No'.
-			this.DialogResult = System.Windows.Forms.DialogResult.No;
-
-			// Make sure that list is empty.
-			this.FilesList.Items.Clear();
-
+			Reset();
 			this.FilesList.Items.AddRange(names);
 
 			return this.ShowDialog() == (System.Windows.Forms.DialogResult.Yes) ? true : false;

@@ -36,6 +36,7 @@ namespace FSANC.Windows
 			if (ListBox_Files.SelectedIndex != -1)
 			{
 				this.Button_Ok.Enabled = true;
+				this.Button_Ok.Focus();
 			}
 		}
 
@@ -49,7 +50,7 @@ namespace FSANC.Windows
 			}
 		}
 
-		private void reset()
+		private void Reset()
 		{
 			this.Button_Ok.Enabled = false;
 			this.ListBox_Files.Items.Clear();
@@ -60,7 +61,7 @@ namespace FSANC.Windows
 		#region Public methods
 		public VideoFromDatabase showSelectionBox(VideoFromDatabase[] list)
 		{
-			reset();
+			Reset();
 			updateListBox(list);
 			this.ShowDialog();
 

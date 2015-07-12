@@ -29,38 +29,16 @@ namespace FSANC
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.StartPosition = FormStartPosition.CenterParent;
-			
-			this.YesButton = new System.Windows.Forms.Button();
-			this.NoButton = new System.Windows.Forms.Button();
 			this.ConfirmationLabel = new System.Windows.Forms.Label();
 			this.FilesList = new System.Windows.Forms.ListBox();
+			this.NoButton = new System.Windows.Forms.Button();
+			this.YesButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
-			// 
-			// YesButton
-			// 
-			this.YesButton.Location = new System.Drawing.Point(112, 296);
-			this.YesButton.Name = "YesButton";
-			this.YesButton.Size = new System.Drawing.Size(75, 23);
-			this.YesButton.TabIndex = 0;
-			this.YesButton.Text = "Yes";
-			this.YesButton.UseVisualStyleBackColor = true;
-			this.YesButton.Click += new System.EventHandler(this.Button_Yes_Click);
-			// 
-			// NoButton
-			// 
-			this.NoButton.Location = new System.Drawing.Point(193, 296);
-			this.NoButton.Name = "NoButton";
-			this.NoButton.Size = new System.Drawing.Size(75, 23);
-			this.NoButton.TabIndex = 1;
-			this.NoButton.Text = "No";
-			this.NoButton.UseVisualStyleBackColor = true;
-			this.NoButton.Click += new System.EventHandler(this.Button_No_Click);
 			// 
 			// ConfirmationLabel
 			// 
 			this.ConfirmationLabel.AutoSize = true;
-			this.ConfirmationLabel.Location = new System.Drawing.Point(130, 280);
+			this.ConfirmationLabel.Location = new System.Drawing.Point(188, 201);
 			this.ConfirmationLabel.Name = "ConfirmationLabel";
 			this.ConfirmationLabel.Size = new System.Drawing.Size(127, 13);
 			this.ConfirmationLabel.TabIndex = 2;
@@ -69,26 +47,47 @@ namespace FSANC
 			// FilesList
 			// 
 			this.FilesList.FormattingEnabled = true;
-			this.FilesList.Location = new System.Drawing.Point(13, 13);
+			this.FilesList.Location = new System.Drawing.Point(12, 12);
 			this.FilesList.Name = "FilesList";
-			this.FilesList.Size = new System.Drawing.Size(360, 264);
+			this.FilesList.Size = new System.Drawing.Size(479, 186);
 			this.FilesList.TabIndex = 3;
+			// 
+			// NoButton
+			// 
+			this.NoButton.Location = new System.Drawing.Point(256, 217);
+			this.NoButton.Name = "NoButton";
+			this.NoButton.Size = new System.Drawing.Size(75, 23);
+			this.NoButton.TabIndex = 1;
+			this.NoButton.Text = "No";
+			this.NoButton.UseVisualStyleBackColor = true;
+			this.NoButton.Click += new System.EventHandler(this.Button_No_Click);
+			// 
+			// YesButton
+			// 
+			this.YesButton.Location = new System.Drawing.Point(175, 217);
+			this.YesButton.Name = "YesButton";
+			this.YesButton.Size = new System.Drawing.Size(75, 23);
+			this.YesButton.TabIndex = 0;
+			this.YesButton.Text = "Yes";
+			this.YesButton.UseVisualStyleBackColor = true;
+			this.YesButton.Click += new System.EventHandler(this.Button_Yes_Click);
 			// 
 			// ConfirmationBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(385, 329);
+			this.ClientSize = new System.Drawing.Size(499, 245);
 			this.ControlBox = false;
-			this.Controls.Add(this.FilesList);
-			this.Controls.Add(this.ConfirmationLabel);
 			this.Controls.Add(this.NoButton);
 			this.Controls.Add(this.YesButton);
+			this.Controls.Add(this.FilesList);
+			this.Controls.Add(this.ConfirmationLabel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ConfirmationBox";
 			this.ShowIcon = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -96,9 +95,9 @@ namespace FSANC
 
 		#endregion
 
-		private System.Windows.Forms.Button YesButton;
-		private System.Windows.Forms.Button NoButton;
 		private System.Windows.Forms.Label ConfirmationLabel;
 		private System.Windows.Forms.ListBox FilesList;
+		private Button NoButton;
+		private Button YesButton;
 	}
 }
