@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FSANC.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,19 +11,25 @@ namespace FSANC
 	public abstract class Video
 	{
 		#region Variables
-		public readonly String _filePath;
+
+		/// <summary>
+		/// Full path with filename.
+		/// </summary>
+		public readonly string _filePath;
 
 		#endregion
 
 		#region Constructor
-		public Video(String path)
+
+		public Video(string path)
 		{
-			_filePath = path;
+			_filePath = path.Trim();
 		}
 
 		#endregion
 
 		#region Private methods
+
 		protected abstract String getFormatedFullName();
 
 		protected String getFileExtention()
@@ -33,8 +40,13 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
+
 		public abstract void renameFile();
 
+		/// <summary>
+		/// Updates file info, must run before renameFile().
+		/// </summary>
+		/// <param name="video">Info about individual video (i.e. Title, Year, Id in database).</param>
 		public abstract void updateVideoInfo(VideoFromDatabase video);
 
 		public override string ToString()
@@ -45,6 +57,10 @@ namespace FSANC
 		#endregion
 
 		#region Properties
+
+		/// <summary>
+		/// Video title name.
+		/// </summary>
 		protected String Name
 		{
 			get;

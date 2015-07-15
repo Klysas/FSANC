@@ -15,8 +15,8 @@ namespace FSANC
 	public sealed class Film : Video
 	{
 		#region Variables
-		private const String TAG = "FILM";
 
+		private const String TAG = "FILM";
 
 		private int _year;
 
@@ -27,6 +27,7 @@ namespace FSANC
 		#endregion
 
 		#region Constructors
+
 		public Film(String path)
 			: base(path)
 		{
@@ -38,13 +39,14 @@ namespace FSANC
 		#endregion
 
 		#region Private methods
+
 		private void tryToGetYear()
 		{
 			try
 			{
 				_year = int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(_filePath), @"\d{4}").ToString());
 			}
-			catch (Exception e)
+			catch
 			{
 				_year = 0;
 			}
@@ -92,6 +94,7 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
+
 		public override void updateVideoInfo(VideoFromDatabase video)
 		{
 			this.Name = video.Name;
@@ -100,16 +103,15 @@ namespace FSANC
 			updateGenres(video.Id);
 		}
 
-		// Renames file.
 		public override void renameFile() // TODO: only can rename files, when language is set and updateVideoInfo() is called.
 		{
-			Log.print(TAG, "Renaming file " + Path.GetDirectoryName(_filePath));
-			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + getFormatedFullName());
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + Utils.Utils.ValidateFileName(getFormatedFullName()));
 		}
 
 		#endregion
 
 		#region Private properties
+
 		private int Year
 		{
 			get { return _year;}
@@ -119,6 +121,7 @@ namespace FSANC
 		#endregion
 
 		#region Public properties
+
 		public String Language
 		{
 			get { return _language; }

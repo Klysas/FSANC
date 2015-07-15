@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Database\VideoFromDatabase.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <Compile Include="Windows\ConfirmationBox.cs">
       <SubType>Form</SubType>
     </Compile>
