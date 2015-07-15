@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
-namespace FSANC
+
+namespace FSANC.Windows
 {
 	partial class ConfirmationBox
 	{

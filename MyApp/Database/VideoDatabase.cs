@@ -9,7 +9,7 @@ using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.TvShows;
 
-namespace FSANC
+namespace FSANC.Database
 {
 	/// <summary>
 	/// Class for connecting to video database and retrieving needed info about films and serials.
@@ -17,6 +17,7 @@ namespace FSANC
 	public class VideoDatabase
 	{
 		#region Variables
+
 		private const String TAG = "VIDEO_DATABASE";
 
 		private static TMDbClient _client = new TMDbClient("9696307d0fc643661e1e2b662a8ba18d");
@@ -25,6 +26,7 @@ namespace FSANC
 
 
 		#region Public static methods
+
 		public static VideoFromDatabase[] getFilmList(String name)
 		{
 			SearchContainer<SearchMovie> container = _client.SearchMovie(name);
@@ -127,6 +129,7 @@ namespace FSANC
 		#endregion
 
 		#region Private static methods
+
 		// Protects date value being null.
 		private static VideoFromDatabase createVideoFromDatabase(int id, String name, DateTime? date)
 		{

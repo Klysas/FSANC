@@ -1,4 +1,5 @@
-﻿using FSANC.Utils;
+﻿using FSANC.Database;
+using FSANC.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSANC
+namespace FSANC.Objects
 {
 	public abstract class Video
 	{

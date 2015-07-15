@@ -7,7 +7,7 @@
     <ProjectGuid>{15D487C7-3C64-4CCF-9594-52785F6ADE27}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FSANC</RootNamespace>
+    <RootNamespace>FSANC.Windows</RootNamespace>
     <AssemblyName>FSANC</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -1,5 +1,6 @@
 ﻿using System;
-namespace FSANC
+
+namespace FSANC.Windows
 {
     partial class MainForm
     {
@@ -60,8 +61,8 @@ namespace FSANC
 			// 
 			this.DropBox.FormattingEnabled = true;
 			this.DropBox.Items.AddRange(new object[] {
-            FSANC.MainForm.VideoType.SERIAL,
-            FSANC.MainForm.VideoType.FILM});
+            FSANC.Windows.MainForm.VideoType.SERIAL,
+            FSANC.Windows.MainForm.VideoType.FILM});
 			this.DropBox.Location = new System.Drawing.Point(151, 12);
 			this.DropBox.Name = "DropBox";
 			this.DropBox.Size = new System.Drawing.Size(121, 21);

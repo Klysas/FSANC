@@ -1,4 +1,5 @@
-﻿using FSANC.Utils;
+﻿using FSANC.Database;
+using FSANC.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FSANC
+namespace FSANC.Objects
 {
 	/// <summary>
 	/// Class for film video file.
@@ -125,7 +126,7 @@ namespace FSANC
 		public String Language
 		{
 			get { return _language; }
-			set { if (FSANC.Language._list.Contains(value)) _language = value; }
+			set { if (FSANC.Objects.Language._list.Contains(value)) _language = value; }
 		}
 
 		#endregion

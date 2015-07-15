@@ -1,18 +1,14 @@
-﻿using System;
+﻿using FSANC.Objects;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FSANC
+namespace FSANC.Windows
 {
 	public partial class ConfirmationBox : Form
 	{
 		#region Constructors
+
 		public ConfirmationBox()
 		{
 			InitializeComponent();
@@ -22,6 +18,7 @@ namespace FSANC
 
 
 		#region Private methods
+
 		private void Button_Yes_Click(object sender, EventArgs e)
 		{
 			this.DialogResult = System.Windows.Forms.DialogResult.Yes;
@@ -38,6 +35,7 @@ namespace FSANC
 
 
 		#region Public methods
+
 		/// <summary>
 		/// Shows window until 'Yes'/'No' is pressed.
 		/// </summary>

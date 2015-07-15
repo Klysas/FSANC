@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using FSANC.Utils;
+using FSANC.Database;
 
-namespace FSANC
+namespace FSANC.Objects
 {
 	/// <summary>
 	/// Class for serial video file.
@@ -15,6 +16,7 @@ namespace FSANC
 	public sealed class Serial : Video
 	{
 		#region Variables
+
 		private const String TAG = "SERIAL";
 
 		private int _season;
@@ -26,6 +28,7 @@ namespace FSANC
 		#endregion
 
 		#region Constructors
+
 		public Serial(String path)
 			: base(path)
 		{
@@ -37,6 +40,7 @@ namespace FSANC
 		#endregion
 
 		#region Private methods
+
 		private void extractSeasonAndEpisode()
 		{
 			String str = Path.GetFileNameWithoutExtension(_filePath);
@@ -79,6 +83,7 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
+
 		public override void updateVideoInfo(VideoFromDatabase video)
 		{
 			this.Name = video.Name;

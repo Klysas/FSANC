@@ -1,21 +1,16 @@
-﻿using FSANC.Utils;
-using FSANC.Windows;
+﻿using FSANC.Database;
+using FSANC.Objects;
+using FSANC.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FSANC
+namespace FSANC.Windows
 {
 	public partial class MainForm : Form
 	{
 		#region Variables
+
 		private const String TAG = "MAIN_FORM";
 
 		/// <summary>
@@ -41,6 +36,7 @@ namespace FSANC
 
 
 		#region Constructors
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -61,6 +57,7 @@ namespace FSANC
 
 
 		#region Private methods
+
 		private void MainForm_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -124,7 +121,7 @@ namespace FSANC
 
 		private void Button_RenameFiles_Click(object sender, EventArgs e)
 		{
-			if ((_videos.Count() > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
+			if ((_videos.Count > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
 			{
 				VideoFromDatabase videoInfo;
 				if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
@@ -190,6 +187,7 @@ namespace FSANC
 		#endregion
 
 		#region Utils
+
 		private void ClearVideoList()
 		{
 			_files.Clear();
@@ -198,7 +196,7 @@ namespace FSANC
 
 		private void UpdateUI()
 		{
-			this.Label_FilesCount.Text = "Files loaded: " + _files.Count();
+			this.Label_FilesCount.Text = "Files loaded: " + _files.Count;
 		}
 
 		#endregion
