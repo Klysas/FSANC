@@ -42,8 +42,6 @@ namespace FSANC.Objects
 
 		#region Public methods
 
-		public abstract void renameFile();
-
 		/// <summary>
 		/// Updates file info, must run before renameFile().
 		/// </summary>
@@ -53,6 +51,11 @@ namespace FSANC.Objects
 		public override string ToString()
 		{	
 			return getFormatedFullName();
+		}
+
+		public void renameFile()
+		{
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + Utils.Utils.ValidateFileName(getFormatedFullName()));
 		}
 
 		#endregion
