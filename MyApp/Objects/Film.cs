@@ -98,6 +98,8 @@ namespace FSANC.Objects
 
 		public override void updateVideoInfo(VideoFromDatabase video)
 		{
+			if (video == null) return;
+			
 			this.Name = video.Name;
 			this.Year = video.Year;
 

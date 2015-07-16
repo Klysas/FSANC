@@ -121,56 +121,63 @@ namespace FSANC.Windows
 
 		private void Button_RenameFiles_Click(object sender, EventArgs e)
 		{
-			if ((_videos.Count > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
+			try
 			{
-				VideoFromDatabase videoInfo;
-				if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
+				if ((_videos.Count > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
 				{
-					// Film.
-					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getFilmList(this.TextBox_VideoName.Text));
-
-					if (videoInfo == null) return;
-
-					foreach (Film video in _videos)
+					VideoFromDatabase videoInfo;
+					if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
 					{
-						video.updateVideoInfo(videoInfo);
-						video.Language = this.LanguageBox.SelectedItem.ToString();
-					}
+						// Film.
+						videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getFilmList(this.TextBox_VideoName.Text));
 
-					if (Confirm(_videos.ToArray()))
-					{
+						if (videoInfo == null) return;
+
 						foreach (Film video in _videos)
 						{
-							video.renameFile();
+							video.updateVideoInfo(videoInfo);
+							video.Language = this.LanguageBox.SelectedItem.ToString();
 						}
 
-						ClearVideoList();
-						UpdateUI();
+						if (Confirm(_videos.ToArray()))
+						{
+							foreach (Film video in _videos)
+							{
+								video.renameFile();
+							}
+
+							ClearVideoList();
+							UpdateUI();
+						}
 					}
-				}
-				else if(_currentVideoType == VideoType.SERIAL)
-				{
-					// Serial.
-					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getSerialList(this.TextBox_VideoName.Text));
-
-					if (videoInfo == null) return;
-
-					foreach (Serial video in _videos)
+					else if (_currentVideoType == VideoType.SERIAL)
 					{
-						video.updateVideoInfo(videoInfo);
-					}
+						// Serial.
+						videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getSerialList(this.TextBox_VideoName.Text));
 
-					if (Confirm(_videos.ToArray()))
-					{
+						if (videoInfo == null) return;
+
 						foreach (Serial video in _videos)
 						{
-							video.renameFile();
+							video.updateVideoInfo(videoInfo);
 						}
 
-						ClearVideoList();
-						UpdateUI();
+						if (Confirm(_videos.ToArray()))
+						{
+							foreach (Serial video in _videos)
+							{
+								video.renameFile();
+							}
+
+							ClearVideoList();
+							UpdateUI();
+						}
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
 			}
 		}
 
