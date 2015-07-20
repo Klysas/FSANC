@@ -30,10 +30,6 @@ namespace FSANC.Windows
         /// </summary>
         private void InitializeComponent()
         {
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-
-			this.MaximizeBox = false;
-
 			this.Label_FilesCount = new System.Windows.Forms.Label();
 			this.DropBox = new System.Windows.Forms.ComboBox();
 			this.ClearButton = new System.Windows.Forms.Button();
@@ -43,7 +39,7 @@ namespace FSANC.Windows
 			this.LanguageBox = new System.Windows.Forms.ComboBox();
 			this.SuspendLayout();
 			// 
-			// FilesCountLabel
+			// Label_FilesCount
 			// 
 			this.Label_FilesCount.AutoSize = true;
 			this.Label_FilesCount.BackColor = System.Drawing.SystemColors.Control;
@@ -51,7 +47,7 @@ namespace FSANC.Windows
 			this.Label_FilesCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Label_FilesCount.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.Label_FilesCount.Location = new System.Drawing.Point(12, 13);
-			this.Label_FilesCount.Name = "FilesCountLabel";
+			this.Label_FilesCount.Name = "Label_FilesCount";
 			this.Label_FilesCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
 			this.Label_FilesCount.Size = new System.Drawing.Size(96, 16);
 			this.Label_FilesCount.TabIndex = 0;
@@ -59,6 +55,7 @@ namespace FSANC.Windows
 			// 
 			// DropBox
 			// 
+			this.DropBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.DropBox.FormattingEnabled = true;
 			this.DropBox.Items.AddRange(new object[] {
             FSANC.Windows.MainForm.VideoType.SERIAL,
@@ -67,8 +64,6 @@ namespace FSANC.Windows
 			this.DropBox.Name = "DropBox";
 			this.DropBox.Size = new System.Drawing.Size(121, 21);
 			this.DropBox.TabIndex = 1;
-			this.DropBox.SelectedIndex = 0;
-			this.LanguageBox.Hide();
 			this.DropBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_VideoType_SelectedIndexChanged);
 			// 
 			// ClearButton
@@ -90,10 +85,10 @@ namespace FSANC.Windows
 			this.NameLabel.TabIndex = 3;
 			this.NameLabel.Text = "Name:";
 			// 
-			// NameBox
+			// TextBox_VideoName
 			// 
 			this.TextBox_VideoName.Location = new System.Drawing.Point(58, 50);
-			this.TextBox_VideoName.Name = "NameBox";
+			this.TextBox_VideoName.Name = "TextBox_VideoName";
 			this.TextBox_VideoName.Size = new System.Drawing.Size(214, 20);
 			this.TextBox_VideoName.TabIndex = 4;
 			// 
@@ -111,6 +106,7 @@ namespace FSANC.Windows
 			// LanguageBox
 			// 
 			this.LanguageBox.FormattingEnabled = true;
+			this.LanguageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.LanguageBox.Items.AddRange(new object[] {
             "EN",
             "LT",
@@ -137,6 +133,8 @@ namespace FSANC.Windows
 			this.Controls.Add(this.ClearButton);
 			this.Controls.Add(this.DropBox);
 			this.Controls.Add(this.Label_FilesCount);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.ShowIcon = false;
 			this.Text = "Rename Video Files";

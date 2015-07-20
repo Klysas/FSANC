@@ -51,6 +51,8 @@ namespace FSANC.Windows
 			this.AllowDrop = true;
 			this.DragEnter += MainForm_DragEnter;
 			this.DragDrop += MainForm_DragDrop;
+
+			this.DropBox.SelectedIndex = 0;
 		}
 
 		#endregion
