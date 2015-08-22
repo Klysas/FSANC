@@ -1,31 +1,36 @@
-﻿using System;
+﻿using FSANC.Database;
+using FSANC.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FSANC
+namespace FSANC.Objects
 {
 	public abstract class Video
 	{
 		#region Variables
-		public readonly String _filePath;
 
-		private readonly Regex _invalidFileRegex = new Regex(string.Format("[{0}]", Regex.Escape(@"<>:""/\|?*")));
+		/// <summary>
+		/// Full path with filename.
+		/// </summary>
+		public readonly string _filePath;
 
 		#endregion
 
 		#region Constructor
-		public Video(String path)
+
+		public Video(string path)
 		{
-			_filePath = path;
+			_filePath = path.Trim();
 		}
 
 		#endregion
 
 		#region Private methods
+
 		protected abstract String getFormatedFullName();
 
 		protected String getFileExtention()
@@ -33,24 +38,14 @@ namespace FSANC
 			return Path.GetExtension(_filePath);
 		}
 
-		/// <summary>
-		/// Removes invalid characters for path and name of file.
-		/// </summary>
-		/// <param name="fileName"></param>
-		/// <returns></returns>
-		private string SanitizeFileName(string fileName)
-		{
-			return _invalidFileRegex.Replace(fileName, string.Empty);
-		}
-
 		#endregion
 
 		#region Public methods
-		public void renameFile() // TODO: only can rename files, when language is set and updateVideoInfo() is called.
-		{
-			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + SanitizeFileName(getFormatedFullName()));
-		}
 
+		/// <summary>
+		/// Updates file info, must run before renameFile().
+		/// </summary>
+		/// <param name="video">Info about individual video (i.e. Title, Year, Id in database).</param>
 		public abstract void updateVideoInfo(VideoFromDatabase video);
 
 		public override string ToString()
@@ -58,9 +53,18 @@ namespace FSANC
 			return getFormatedFullName();
 		}
 
+		public void renameFile()
+		{
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + Utils.Utils.ValidateFileName(getFormatedFullName()));
+		}
+
 		#endregion
 
 		#region Properties
+
+		/// <summary>
+		/// Video title name.
+		/// </summary>
 		protected String Name
 		{
 			get;

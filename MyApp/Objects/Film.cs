@@ -1,4 +1,5 @@
-﻿using FSANC.Utils;
+﻿using FSANC.Database;
+using FSANC.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace FSANC
+namespace FSANC.Objects
 {
 	/// <summary>
 	/// Class for film video file.
@@ -15,8 +16,8 @@ namespace FSANC
 	public sealed class Film : Video
 	{
 		#region Variables
-		private const String TAG = "FILM";
 
+		private const String TAG = "FILM";
 
 		private int _year;
 
@@ -27,6 +28,7 @@ namespace FSANC
 		#endregion
 
 		#region Constructors
+
 		public Film(String path)
 			: base(path)
 		{
@@ -38,13 +40,14 @@ namespace FSANC
 		#endregion
 
 		#region Private methods
+
 		private void tryToGetYear()
 		{
 			try
 			{
 				_year = int.Parse(Regex.Match(Path.GetFileNameWithoutExtension(_filePath), @"\d{4}").ToString());
 			}
-			catch (Exception e)
+			catch
 			{
 				_year = 0;
 			}
@@ -92,8 +95,11 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
+
 		public override void updateVideoInfo(VideoFromDatabase video)
 		{
+			if (video == null) return;
+			
 			this.Name = video.Name;
 			this.Year = video.Year;
 
@@ -103,6 +109,7 @@ namespace FSANC
 		#endregion
 
 		#region Private properties
+
 		private int Year
 		{
 			get { return _year;}
@@ -112,10 +119,11 @@ namespace FSANC
 		#endregion
 
 		#region Public properties
+
 		public String Language
 		{
 			get { return _language; }
-			set { if (FSANC.Language._list.Contains(value)) _language = value; }
+			set { if (FSANC.Objects.Language._list.Contains(value)) _language = value; }
 		}
 
 		#endregion

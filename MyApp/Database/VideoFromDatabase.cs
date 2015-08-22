@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FSANC
+namespace FSANC.Database
 {
 	public class VideoFromDatabase
 	{
 		#region Constructors
+
 		public VideoFromDatabase(int id, String name, int year)
 		{
 			this.Id = id;
@@ -19,6 +20,7 @@ namespace FSANC
 		#endregion
 
 		#region Properties
+
 		public int Id
 		{
 			get;
@@ -40,6 +42,7 @@ namespace FSANC
 		#endregion
 
 		#region Public methods
+
 		override public String ToString()
 		{
 			return this.Name + "\t" + this.Year;

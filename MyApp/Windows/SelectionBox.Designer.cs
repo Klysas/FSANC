@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+
 namespace FSANC.Windows
 {
 	partial class SelectionBox

@@ -1,21 +1,16 @@
-﻿using FSANC.Utils;
-using FSANC.Windows;
+﻿using FSANC.Database;
+using FSANC.Objects;
+using FSANC.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FSANC
+namespace FSANC.Windows
 {
 	public partial class MainForm : Form
 	{
 		#region Variables
+
 		private const String TAG = "MAIN_FORM";
 
 		/// <summary>
@@ -41,6 +36,7 @@ namespace FSANC
 
 
 		#region Constructors
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -55,12 +51,15 @@ namespace FSANC
 			this.AllowDrop = true;
 			this.DragEnter += MainForm_DragEnter;
 			this.DragDrop += MainForm_DragDrop;
+
+			this.DropBox.SelectedIndex = 0;
 		}
 
 		#endregion
 
 
 		#region Private methods
+
 		private void MainForm_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -124,56 +123,63 @@ namespace FSANC
 
 		private void Button_RenameFiles_Click(object sender, EventArgs e)
 		{
-			if ((_videos.Count() > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
+			try
 			{
-				VideoFromDatabase videoInfo;
-				if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
+				if ((_videos.Count > 0) && (this.TextBox_VideoName.Text != System.String.Empty))
 				{
-					// Film.
-					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getFilmList(this.TextBox_VideoName.Text));
-
-					if (videoInfo == null) return;
-
-					foreach (Film video in _videos)
+					VideoFromDatabase videoInfo;
+					if ((_currentVideoType == VideoType.FILM) && (this.LanguageBox.SelectedIndex != -1))
 					{
-						video.updateVideoInfo(videoInfo);
-						video.Language = this.LanguageBox.SelectedItem.ToString();
-					}
+						// Film.
+						videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getFilmList(this.TextBox_VideoName.Text));
 
-					if (Confirm(_videos.ToArray()))
-					{
+						if (videoInfo == null) return;
+
 						foreach (Film video in _videos)
 						{
-							video.renameFile();
+							video.updateVideoInfo(videoInfo);
+							video.Language = this.LanguageBox.SelectedItem.ToString();
 						}
 
-						ClearVideoList();
-						UpdateUI();
+						if (Confirm(_videos.ToArray()))
+						{
+							foreach (Film video in _videos)
+							{
+								video.renameFile();
+							}
+
+							ClearVideoList();
+							UpdateUI();
+						}
 					}
-				}
-				else if(_currentVideoType == VideoType.SERIAL)
-				{
-					// Serial.
-					videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getSerialList(this.TextBox_VideoName.Text));
-
-					if (videoInfo == null) return;
-
-					foreach (Serial video in _videos)
+					else if (_currentVideoType == VideoType.SERIAL)
 					{
-						video.updateVideoInfo(videoInfo);
-					}
+						// Serial.
+						videoInfo = _selectionBox.showSelectionBox(VideoDatabase.getSerialList(this.TextBox_VideoName.Text));
 
-					if (Confirm(_videos.ToArray()))
-					{
+						if (videoInfo == null) return;
+
 						foreach (Serial video in _videos)
 						{
-							video.renameFile();
+							video.updateVideoInfo(videoInfo);
 						}
 
-						ClearVideoList();
-						UpdateUI();
+						if (Confirm(_videos.ToArray()))
+						{
+							foreach (Serial video in _videos)
+							{
+								video.renameFile();
+							}
+
+							ClearVideoList();
+							UpdateUI();
+						}
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString());
 			}
 		}
 
@@ -190,6 +196,7 @@ namespace FSANC
 		#endregion
 
 		#region Utils
+
 		private void ClearVideoList()
 		{
 			_files.Clear();
@@ -198,7 +205,7 @@ namespace FSANC
 
 		private void UpdateUI()
 		{
-			this.Label_FilesCount.Text = "Files loaded: " + _files.Count();
+			this.Label_FilesCount.Text = "Files loaded: " + _files.Count;
 		}
 
 		#endregion

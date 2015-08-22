@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using FSANC.Database;
+using System;
 using System.Windows.Forms;
 
 namespace FSANC.Windows
 {
 	public partial class SelectionBox : Form
 	{
+		#region Constructors
+
 		public SelectionBox()
 		{
 			InitializeComponent();
 
 		}
 
+		#endregion
+
 		#region Private methods
+
 		private void Button_Ok_Click(object sender, EventArgs e)
 		{
 			this.Close();
@@ -59,6 +57,7 @@ namespace FSANC.Windows
 		#endregion
 
 		#region Public methods
+
 		public VideoFromDatabase showSelectionBox(VideoFromDatabase[] list)
 		{
 			Reset();
