@@ -55,7 +55,7 @@ namespace FSANC.Objects
 
 		public void renameFile()
 		{
-			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + Utils.Utils.ValidateFileName(getFormatedFullName()));
+			File.Move(_filePath, Path.GetDirectoryName(_filePath) + "\\" + Utils.Utils.SanitizeFileName(getFormatedFullName()));
 		}
 
 		#endregion
